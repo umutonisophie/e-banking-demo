@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Banking - Login</title>
+    <link rel="stylesheet" href="project.css">
+</head>
+<body>
+
+<div class="atm-card">
+    <h2>Secure Login</h2>
+    
+    <div class="input-group">
+        <input type="text" id="username" placeholder="Username" required>
+    </div>
+    
+    <div class="input-group">
+        <input type="password" id="password" placeholder="Password" required>
+    </div>
+
+    <button class="btn-primary" onclick="handleLogin()">Login</button>
+
+    <p id="message"></p>
+</div>
+
+<script>
+    function handleLogin() {
+        const user = document.getElementById('username').value.trim();
+        const pass = document.getElementById('password').value.trim();
+        const msg = document.getElementById('message');
+
+        // Simple check to ensure fields aren't empty for your demonstration
+        if (user === "" || pass === "") {
+            msg.innerText = "Please enter both username and password.";
+            msg.className = "error";
+            return;
+        }
+
+        
+        window.location.href = "dashboard.html";
+    }
+</script>
+
+</body>
+</html>

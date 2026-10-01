@@ -1,0 +1,11 @@
+{
+  "name": "e-banking-demo",
+  "version": "1.0.0",
+  "description": "A banking UI demo: login, balance, deposit and withdraw. Front-end only.",
+  "private": true,
+  "scripts": {
+    "test": "node ebanking.test.js",
+    "start": "python3 -m http.server 8000"
+  },
+  "license": "MIT"
+}

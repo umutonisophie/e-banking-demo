@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Banking - Dashboard</title>
+    <link rel="stylesheet" href="project.css">
+</head>
+<body>
+
+<div class="atm-card dashboard-card">
+    <h2>Banking Dashboard</h2>
+    <div class="balance-box">
+        Balance: $<span id="balance-display">1000.00</span>
+    </div>
+
+
+    <div class="input-group">
+        <input type="text" id="account-input" placeholder="Enter Account Number">
+    </div>
+    <div class="input-group">
+        <input type="password" id="pin-input" placeholder="Enter Transaction PIN">
+    </div>
+    <div class="input-group">
+        <input type="number" id="amount-input" placeholder="Enter Amount ($)" min="1">
+    </div>
+
+    <div class="btn-group">
+        <button class="btn-deposit" onclick="processTransaction('deposit')">Deposit</button>
+        <button class="btn-withdraw" onclick="processTransaction('withdraw')">Withdraw</button>
+    </div>
+
+    <p id="message"></p>
+    <a href="project.html" class="logout-link">Logout</a>
+</div>
+
+<script>
+    let balance = 1000.00;
+    
+
+    const correctAccount = "123456";
+    const correctPin = "9999";
+
+    function processTransaction(type) {
+        const account = document.getElementById('account-input').value.trim();
+        const pin = document.getElementById('pin-input').value.trim();
+        const amountInput = document.getElementById('amount-input');
+        const balanceDisplay = document.getElementById('balance-display');
+        const messageTxt = document.getElementById('message');
+
+        
+        if (account !== correctAccount || pin !== correctPin) {
+            messageTxt.innerText = "Error: Invalid Account Number or PIN!";
+            messageTxt.className = "error";
+            return;
+        }
+
+        
+        let amount = parseFloat(amountInput.value);
+        if (isNaN(amount) || amount <= 0) {
+            messageTxt.innerText = "Please enter a valid monetary amount.";
+            messageTxt.className = "error";
+            return;
+        }
+
+        
+        if (type === 'deposit') {
+            balance += amount;
+            messageTxt.innerText = `Successfully deposited $${amount.toFixed(2)}`;
+            messageTxt.className = "success";
+        } else if (type === 'withdraw') {
+            if (amount > balance) {
+                messageTxt.innerText = "Transaction denied: Insufficient funds!";
+                messageTxt.className = "error";
+                return;
+            }
+            balance -= amount;
+            messageTxt.innerText = `Successfully withdrew $${amount.toFixed(2)}`;
+            messageTxt.className = "success";
+        }
+
+        
+        balanceDisplay.innerText = balance.toFixed(2);
+        amountInput.value = '';
+    }
+</script>
+
+</body>
+</html>
